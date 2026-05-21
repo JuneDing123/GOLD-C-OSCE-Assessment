@@ -201,7 +201,7 @@
 
     .summary {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 14px;
     }
 
@@ -300,14 +300,22 @@
     }
 
     @media (max-width: 900px) {
-      .grid, .grid-2, .summary { grid-template-columns: 1fr 1fr; }
+      .grid, .grid-2 { grid-template-columns: 1fr 1fr; }
+      .summary {
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+        overflow-x: auto;
+      }
       table { display: block; overflow-x: auto; white-space: nowrap; }
     }
 
     @media (max-width: 640px) {
       .page { padding: 18px 12px 40px; }
       .header, .card { padding: 20px; }
-      .grid, .grid-2, .summary { grid-template-columns: 1fr; }
+      .grid, .grid-2 { grid-template-columns: 1fr; }
+      .summary {
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+        overflow-x: auto;
+      }
     }
 
     @media print {
@@ -704,7 +712,7 @@
           rows += `
             <tr>
               <td>${item.label}</td>
-              <td>${item.max}${item.allowNA ? " / N/A" : ""}</td>
+              <td>${item.max}</td>
               <td><select id="${item.id}"></select></td>
               <td><input id="${item.id}Note" type="text" placeholder="备注" /></td>
               <td><div id="${item.id}Hint" class="score-hint hint-empty">请选择得分后显示评分提示</div></td>
