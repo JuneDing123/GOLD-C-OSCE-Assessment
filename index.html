@@ -193,33 +193,15 @@
       min-height: 42px;
     }
 
-    .hint-empty {
-      color: #9ca3af;
-    }
-
-    .hint-na {
-      color: #6b7280;
-      font-weight: 700;
-    }
-
-    .hint-bad {
-      color: #b91c1c;
-      font-weight: 800;
-    }
-
-    .hint-mid {
-      color: #b45309;
-      font-weight: 800;
-    }
-
-    .hint-good {
-      color: #047857;
-      font-weight: 800;
-    }
+    .hint-empty { color: #9ca3af; }
+    .hint-na { color: #6b7280; font-weight: 700; }
+    .hint-bad { color: #b91c1c; font-weight: 800; }
+    .hint-mid { color: #b45309; font-weight: 800; }
+    .hint-good { color: #047857; font-weight: 800; }
 
     .summary {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
 
@@ -471,31 +453,14 @@
         </div>
 
         <div class="summary-box">
-          <div class="label">通过线</div>
-          <div class="value"><span id="summaryPassLine">70</span>%</div>
-        </div>
-
-        <div class="summary-box">
-          <div class="label">结果</div>
-          <div class="value" id="finalResult">未完成</div>
-        </div>
-
-        <div class="summary-box">
           <div class="label">案例</div>
           <div class="value" style="font-size: 16px;" id="summaryCase">-</div>
         </div>
       </div>
 
-      <div class="grid-2" style="margin-top: 20px;">
-        <div>
-          <label for="overallComment">总体评价</label>
-          <textarea id="overallComment" placeholder="请输入总体评价"></textarea>
-        </div>
-
-        <div>
-          <label for="improvementPlan">改进建议</label>
-          <textarea id="improvementPlan" placeholder="请输入后续改进建议"></textarea>
-        </div>
+      <div style="margin-top: 20px;">
+        <label for="overallComment">总体评价</label>
+        <textarea id="overallComment" placeholder="请输入总体评价"></textarea>
       </div>
 
       <div class="actions">
@@ -966,23 +931,19 @@
       document.getElementById("summaryCm").textContent = results.cm.percent;
       document.getElementById("overallScore").textContent = overall;
       document.getElementById("summaryWeightTotal").textContent = weightTotal;
-      document.getElementById("summaryPassLine").textContent = PASS_LINE;
       document.getElementById("summaryCase").textContent = `${c.no}. ${c.caseName}`;
 
-      const finalResult = document.getElementById("finalResult");
+      let finalResultText = "未完成";
 
       if (!allComplete) {
-        finalResult.textContent = "未完成";
-        finalResult.className = "value pending";
+        finalResultText = "未完成";
       } else if (overall >= PASS_LINE) {
-        finalResult.textContent = "通过";
-        finalResult.className = "value pass";
+        finalResultText = "通过";
       } else {
-        finalResult.textContent = "不通过";
-        finalResult.className = "value fail";
+        finalResultText = "不通过";
       }
 
-      return { results, overall, allComplete, finalResult: finalResult.textContent };
+      return { results, overall, allComplete, finalResult: finalResultText };
     }
 
     function collectData() {
@@ -1031,10 +992,9 @@
           cm: document.getElementById("summaryCm").textContent
         },
         overallScore: document.getElementById("overallScore").textContent,
-        finalResult: document.getElementById("finalResult").textContent,
+        finalResult: calculation.finalResult,
         allComplete: calculation.allComplete,
-        overallComment: getRawValue("overallComment"),
-        improvementPlan: getRawValue("improvementPlan")
+        overallComment: getRawValue("overallComment")
       };
     }
 
@@ -1062,7 +1022,6 @@
       setValue("assessorName", data.assessorName);
       setValue("stationSelect", data.station);
       setValue("overallComment", data.overallComment);
-      setValue("improvementPlan", data.improvementPlan);
 
       if (data.caseNo) setValue("caseSelect", String(data.caseNo));
 
@@ -1197,7 +1156,6 @@
             <tr><th>Module</th><td>${safeText(item.module)}</td><th>最终总分</th><td><strong>${safeText(item.overallScore)}</strong></td></tr>
             <tr><th>结果</th><td>${safeText(item.finalResult)}</td><th>权重合计</th><td>${safeText(item.weights.total)}%</td></tr>
             <tr><th>总体评价</th><td colspan="3">${safeText(item.overallComment)}</td></tr>
-            <tr><th>改进建议</th><td colspan="3">${safeText(item.improvementPlan)}</td></tr>
           </tbody>
         </table>
 
@@ -1281,7 +1239,7 @@
         "Case No", "Case", "Module",
         "ICS Weight", "IG Weight", "PE Weight", "DX Weight", "CM Weight",
         "ICS %", "IG %", "PE %", "DX %", "CM %",
-        "Overall Score", "Pass Line", "Final Result", "Overall Comment", "Improvement Plan"
+        "Overall Score", "Pass Line", "Final Result", "Overall Comment"
       ]);
 
       list.forEach((data, index) => {
@@ -1309,8 +1267,7 @@
           data.overallScore,
           PASS_LINE + "%",
           data.finalResult,
-          data.overallComment,
-          data.improvementPlan
+          data.overallComment
         ]);
 
         if (includeDetail) {
