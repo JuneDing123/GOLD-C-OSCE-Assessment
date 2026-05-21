@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GOLD OSCE Assessment</title>
-
+  <title>GOLD-C OSCE Assessment</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -63,14 +60,14 @@
     }
 
     h3 {
-      margin: 0 0 14px;
+      margin: 18px 0 12px;
       font-size: 17px;
       color: #123f6d;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
@@ -132,25 +129,14 @@
       color: #9a3412;
     }
 
-    .weight-table,
-    .score-table,
-    .result-list-table,
-    .detail-table {
+    table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 14px;
-      overflow: hidden;
-      border-radius: 12px;
     }
 
-    .weight-table th,
-    .weight-table td,
-    .score-table th,
-    .score-table td,
-    .result-list-table th,
-    .result-list-table td,
-    .detail-table th,
-    .detail-table td {
+    th,
+    td {
       border-bottom: 1px solid #e5e7eb;
       padding: 11px 12px;
       text-align: left;
@@ -158,10 +144,7 @@
       vertical-align: top;
     }
 
-    .weight-table th,
-    .score-table th,
-    .result-list-table th,
-    .detail-table th {
+    th {
       background: #f8fafc;
       color: #374151;
       font-weight: 800;
@@ -200,22 +183,6 @@
       font-weight: 800;
     }
 
-    .score-table td:first-child {
-      width: 45%;
-    }
-
-    .score-table td:nth-child(2) {
-      width: 15%;
-    }
-
-    .score-table td:nth-child(3) {
-      width: 20%;
-    }
-
-    .score-table td:nth-child(4) {
-      width: 20%;
-    }
-
     .summary {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -241,20 +208,9 @@
       color: #123f6d;
     }
 
-    .pass {
-      color: #047857 !important;
-      font-weight: 900;
-    }
-
-    .fail {
-      color: #b91c1c !important;
-      font-weight: 900;
-    }
-
-    .pending {
-      color: #6b7280 !important;
-      font-weight: 900;
-    }
+    .pass { color: #047857 !important; font-weight: 900; }
+    .fail { color: #b91c1c !important; font-weight: 900; }
+    .pending { color: #6b7280 !important; font-weight: 900; }
 
     .actions {
       display: flex;
@@ -273,32 +229,11 @@
       cursor: pointer;
     }
 
-    .btn-primary {
-      background: #123f6d;
-      color: #fff;
-    }
-
-    .btn-gold {
-      background: #d4af37;
-      color: #111827;
-    }
-
-    .btn-light {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .btn-danger {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .btn-small {
-      padding: 7px 12px;
-      font-size: 12px;
-      margin-right: 6px;
-      margin-bottom: 6px;
-    }
+    .btn-primary { background: #123f6d; color: #fff; }
+    .btn-gold { background: #d4af37; color: #111827; }
+    .btn-light { background: #e5e7eb; color: #111827; }
+    .btn-danger { background: #fee2e2; color: #991b1b; }
+    .btn-small { padding: 7px 12px; font-size: 12px; margin-right: 6px; margin-bottom: 6px; }
 
     .list-toolbar {
       display: flex;
@@ -313,6 +248,16 @@
       font-size: 14px;
       color: #374151;
       font-weight: 700;
+    }
+
+    .empty-list {
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      color: #64748b;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .detail-panel {
@@ -331,16 +276,6 @@
       margin-bottom: 12px;
     }
 
-    .empty-list {
-      padding: 18px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      color: #64748b;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
     .footer-note {
       margin-top: 16px;
       font-size: 12px;
@@ -349,57 +284,21 @@
     }
 
     @media (max-width: 900px) {
-      .grid,
-      .grid-2,
-      .summary {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
+      .grid, .grid-2, .summary { grid-template-columns: 1fr 1fr; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
     }
 
     @media (max-width: 640px) {
-      .page {
-        padding: 18px 12px 40px;
-      }
-
-      .header,
-      .card {
-        padding: 20px;
-      }
-
-      .grid,
-      .grid-2,
-      .summary {
-        grid-template-columns: 1fr;
-      }
+      .page { padding: 18px 12px 40px; }
+      .header, .card { padding: 20px; }
+      .grid, .grid-2, .summary { grid-template-columns: 1fr; }
     }
 
     @media print {
-      body {
-        background: #fff;
-      }
-
-      .page {
-        max-width: none;
-        padding: 0;
-      }
-
-      .header,
-      .card,
-      .score-section {
-        box-shadow: none;
-      }
-
-      .actions,
-      .footer-note,
-      .btn-small {
-        display: none;
-      }
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      .header, .card, .score-section { box-shadow: none; }
+      .actions, .footer-note, .btn-small { display: none; }
     }
   </style>
 </head>
@@ -407,9 +306,9 @@
 <body>
   <div class="page">
     <header class="header">
-      <h1>GOLD™ OSCE Assessment</h1>
+      <h1>GOLD-C 培训 OSCE 评估</h1>
       <p>
-        本表用于 GOLD 培训 OSCE 评估。系统会根据所选案例自动调整 Comm、Hx、PE、Dx、Mx 各大评分项权重，并自动计算最终成绩。
+        本表用于 GOLD-C 培训 OSCE 评估。系统会根据所选案例自动调整各大评分项权重，并自动计算最终成绩。
       </p>
     </header>
 
@@ -424,12 +323,7 @@
 
         <div>
           <label for="candidateId">学员编号</label>
-          <input id="candidateId" type="text" placeholder="请输入学员编号" />
-        </div>
-
-        <div>
-          <label for="trainingSite">培训机构 / 基地</label>
-          <input id="trainingSite" type="text" placeholder="请输入机构名称" />
+          <select id="candidateId"></select>
         </div>
 
         <div>
@@ -438,29 +332,18 @@
         </div>
 
         <div>
-          <label for="assessorName">评估员姓名</label>
-          <input id="assessorName" type="text" placeholder="请输入评估员姓名" />
+          <label for="assessorName">考官姓名</label>
+          <input id="assessorName" type="text" placeholder="请输入考官姓名" />
         </div>
 
         <div>
-          <label for="assessmentRound">评估轮次</label>
-          <select id="assessmentRound">
-            <option value="">请选择</option>
-            <option value="课前评估">课前评估</option>
-            <option value="课后评估">课后评估</option>
-            <option value="结业评估">结业评估</option>
-            <option value="补考评估">补考评估</option>
-          </select>
+          <label for="stationSelect">考站</label>
+          <select id="stationSelect"></select>
         </div>
 
         <div>
           <label for="caseSelect">案例选择</label>
           <select id="caseSelect"></select>
-        </div>
-
-        <div>
-          <label for="passLine">通过线</label>
-          <input id="passLine" type="number" value="70" min="0" max="100" />
         </div>
       </div>
     </section>
@@ -469,35 +352,35 @@
       <h2>二、当前案例权重</h2>
 
       <div class="notice">
-        计算逻辑：先将每个大评分项换算为百分制，再按当前案例的权重计算最终总分。
+        计算逻辑：先将 ICS、IG、PE、DX、CM 各大评分项换算为百分制，再按当前案例权重计算最终总分。
       </div>
 
       <div id="weightWarning" class="notice warning"></div>
 
-      <table class="weight-table">
+      <table>
         <thead>
           <tr>
+            <th>NO.</th>
             <th>Case</th>
-            <th>Presenting Problem</th>
             <th>Module</th>
-            <th>Comm</th>
-            <th>Hx</th>
+            <th>ICS</th>
+            <th>IG</th>
             <th>PE</th>
-            <th>Dx</th>
-            <th>Mx</th>
+            <th>DX</th>
+            <th>CM</th>
             <th>合计</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td id="currentCaseNo"></td>
-            <td id="currentProblem"></td>
+            <td id="currentCase"></td>
             <td id="currentModule"></td>
-            <td id="currentCommWeight"></td>
-            <td id="currentHxWeight"></td>
+            <td id="currentIcsWeight"></td>
+            <td id="currentIgWeight"></td>
             <td id="currentPeWeight"></td>
             <td id="currentDxWeight"></td>
-            <td id="currentMxWeight"></td>
+            <td id="currentCmWeight"></td>
             <td id="currentWeightTotal"></td>
           </tr>
         </tbody>
@@ -507,201 +390,7 @@
     <section class="card">
       <h2>三、OSCE 评分</h2>
 
-      <div class="score-section">
-        <div class="score-section-header">
-          <div class="score-section-title">Comm：人际沟通技巧</div>
-          <div class="section-result">得分：<span id="commPercent">0</span>%</div>
-        </div>
-
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th>评分项</th>
-              <th>最高分</th>
-              <th>得分</th>
-              <th>备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Comm 1</td>
-              <td>5</td>
-              <td><select id="comm1"></select></td>
-              <td><input id="comm1Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Comm 2</td>
-              <td>5</td>
-              <td><select id="comm2"></select></td>
-              <td><input id="comm2Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Comm 3</td>
-              <td>5</td>
-              <td><select id="comm3"></select></td>
-              <td><input id="comm3Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Comm 4</td>
-              <td>5</td>
-              <td><select id="comm4"></select></td>
-              <td><input id="comm4Note" type="text" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="score-section">
-        <div class="score-section-header">
-          <div class="score-section-title">Hx：信息收集</div>
-          <div class="section-result">得分：<span id="hxPercent">0</span>%</div>
-        </div>
-
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th>评分项</th>
-              <th>最高分</th>
-              <th>得分</th>
-              <th>备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Hx 1</td>
-              <td>5</td>
-              <td><select id="hx1"></select></td>
-              <td><input id="hx1Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Hx 2</td>
-              <td>5</td>
-              <td><select id="hx2"></select></td>
-              <td><input id="hx2Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Hx 3</td>
-              <td>5</td>
-              <td><select id="hx3"></select></td>
-              <td><input id="hx3Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Hx 4</td>
-              <td>10</td>
-              <td><select id="hx4"></select></td>
-              <td><input id="hx4Note" type="text" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="score-section">
-        <div class="score-section-header">
-          <div class="score-section-title">PE：体格检查</div>
-          <div class="section-result">得分：<span id="pePercent">0</span>%</div>
-        </div>
-
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th>评分项</th>
-              <th>最高分</th>
-              <th>得分</th>
-              <th>备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>PE / VC</td>
-              <td>5</td>
-              <td><select id="pevc"></select></td>
-              <td><input id="pevcNote" type="text" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="score-section">
-        <div class="score-section-header">
-          <div class="score-section-title">Dx：诊断</div>
-          <div class="section-result">得分：<span id="dxPercent">0</span>%</div>
-        </div>
-
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th>评分项</th>
-              <th>最高分</th>
-              <th>得分</th>
-              <th>备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Dx</td>
-              <td>4</td>
-              <td><select id="dx"></select></td>
-              <td><input id="dxNote" type="text" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="score-section">
-        <div class="score-section-header">
-          <div class="score-section-title">Mx：临床处理</div>
-          <div class="section-result">得分：<span id="mxPercent">0</span>%</div>
-        </div>
-
-        <table class="score-table">
-          <thead>
-            <tr>
-              <th>评分项</th>
-              <th>最高分</th>
-              <th>得分</th>
-              <th>备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Mx 1</td>
-              <td>5</td>
-              <td><select id="mx1"></select></td>
-              <td><input id="mx1Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Mx 2</td>
-              <td>5 / N/A</td>
-              <td><select id="mx2" data-na="true"></select></td>
-              <td><input id="mx2Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Mx 3</td>
-              <td>5 / N/A</td>
-              <td><select id="mx3" data-na="true"></select></td>
-              <td><input id="mx3Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Mx 4</td>
-              <td>5 / N/A</td>
-              <td><select id="mx4" data-na="true"></select></td>
-              <td><input id="mx4Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Mx 5</td>
-              <td>10</td>
-              <td><select id="mx5"></select></td>
-              <td><input id="mx5Note" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Mx 6</td>
-              <td>5</td>
-              <td><select id="mx6"></select></td>
-              <td><input id="mx6Note" type="text" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div id="scoreSections"></div>
     </section>
 
     <section class="card">
@@ -709,13 +398,13 @@
 
       <div class="summary">
         <div class="summary-box">
-          <div class="label">Comm</div>
-          <div class="value"><span id="summaryComm">0</span>%</div>
+          <div class="label">ICS</div>
+          <div class="value"><span id="summaryIcs">0</span>%</div>
         </div>
 
         <div class="summary-box">
-          <div class="label">Hx</div>
-          <div class="value"><span id="summaryHx">0</span>%</div>
+          <div class="label">IG</div>
+          <div class="value"><span id="summaryIg">0</span>%</div>
         </div>
 
         <div class="summary-box">
@@ -724,13 +413,13 @@
         </div>
 
         <div class="summary-box">
-          <div class="label">Dx</div>
+          <div class="label">DX</div>
           <div class="value"><span id="summaryDx">0</span>%</div>
         </div>
 
         <div class="summary-box">
-          <div class="label">Mx</div>
-          <div class="value"><span id="summaryMx">0</span>%</div>
+          <div class="label">CM</div>
+          <div class="value"><span id="summaryCm">0</span>%</div>
         </div>
 
         <div class="summary-box">
@@ -782,7 +471,7 @@
       </div>
 
       <div class="footer-note">
-        说明：当前页面为单文件 HTML，默认只在浏览器本地运行。评分列表和草稿会保存在当前浏览器本机，不会自动提交到服务器。
+        当前页面为单文件 HTML，评分列表和草稿会保存在当前浏览器本机 localStorage 中，不会自动提交到服务器。
       </div>
     </section>
 
@@ -804,23 +493,23 @@
         暂无评分记录。完成上方评分后，点击“加入评分列表”，记录会显示在这里。
       </div>
 
-      <table id="resultListTable" class="result-list-table" style="display: none;">
+      <table id="resultListTable" style="display: none;">
         <thead>
           <tr>
             <th>序号</th>
             <th>评估日期</th>
             <th>学员姓名</th>
             <th>学员编号</th>
-            <th>培训机构</th>
+            <th>考站</th>
             <th>案例</th>
-            <th>Comm</th>
-            <th>Hx</th>
+            <th>ICS</th>
+            <th>IG</th>
             <th>PE</th>
-            <th>Dx</th>
-            <th>Mx</th>
+            <th>DX</th>
+            <th>CM</th>
             <th>总分</th>
             <th>结果</th>
-            <th>评估员</th>
+            <th>考官</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -835,63 +524,115 @@
   </div>
 
   <script>
+    const PASS_LINE = 70;
     const NORMALIZE_IF_WEIGHT_NOT_100 = true;
-    const DRAFT_KEY = "gold_osce_assessment_draft";
-    const RESULT_LIST_KEY = "gold_osce_assessment_result_list";
+    const DRAFT_KEY = "gold_c_osce_assessment_draft";
+    const RESULT_LIST_KEY = "gold_c_osce_assessment_result_list";
+
+    const studentIds = [
+      "GOLD-C-001", "GOLD-C-002", "GOLD-C-003", "GOLD-C-004", "GOLD-C-005",
+      "GOLD-C-006", "GOLD-C-007", "GOLD-C-008", "GOLD-C-009", "GOLD-C-010",
+      "GOLD-C-011", "GOLD-C-012", "GOLD-C-013", "GOLD-C-014", "GOLD-C-015",
+      "GOLD-C-016", "GOLD-C-017", "GOLD-C-018", "GOLD-C-019", "GOLD-C-020",
+      "GOLD-C-021", "GOLD-C-022", "GOLD-C-023", "GOLD-C-024", "GOLD-C-025",
+      "GOLD-C-026", "GOLD-C-027", "GOLD-C-028", "GOLD-C-029", "GOLD-C-030"
+    ];
+
+    const stations = [
+      "考站 1", "考站 2", "考站 3", "考站 4", "考站 5",
+      "考站 6", "考站 7", "考站 8", "考站 9", "考站 10"
+    ];
 
     const caseConfigs = [
-      { no: 1, problem: "Menorhagia", module: "OG", comm: 15, hx: 35, pe: 10, dx: 10, mx: 30 },
-      { no: 2, problem: "BPPV", module: "ENT", comm: 15, hx: 35, pe: 10, dx: 10, mx: 30 },
-      { no: 3, problem: "UTI", module: "Uro", comm: 15, hx: 35, pe: 10, dx: 10, mx: 30 },
-      { no: 4, problem: "Diarrhoea", module: "GI", comm: 20, hx: 30, pe: 10, dx: 10, mx: 30 },
-      { no: 5, problem: "Pharyngitis", module: "Respi", comm: 20, hx: 30, pe: 10, dx: 10, mx: 30 },
-      { no: 6, problem: "Elbow pain", module: "Ortho", comm: 15, hx: 20, pe: 30, dx: 10, mx: 25 },
-      { no: 7, problem: "HT compliance", module: "CVS", comm: 10, hx: 30, pe: 15, dx: 15, mx: 30 },
-      { no: 8, problem: "Asthma", module: "Respi", comm: 25, hx: 25, pe: 10, dx: 10, mx: 30 },
-      { no: 9, problem: "Eczema", module: "Skin", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 10, problem: "Dyspepsia", module: "GI", comm: 25, hx: 25, pe: 10, dx: 10, mx: 30 },
-      { no: 11, problem: "Backache", module: "Ortho", comm: 20, hx: 20, pe: 15, dx: 15, mx: 30 },
-      { no: 12, problem: "Hyperthyroid", module: "Endo", comm: 10, hx: 20, pe: 30, dx: 10, mx: 30 },
-      { no: 13, problem: "PV discharge", module: "OG", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 14, problem: "HT", module: "CVS", comm: 10, hx: 30, pe: 15, dx: 15, mx: 30 },
-      { no: 15, problem: "Red eye", module: "Eye", comm: 20, hx: 30, pe: 10, dx: 10, mx: 30 },
-      { no: 16, problem: "Hypothyroid", module: "Endo", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 17, problem: "Hyperlipidaemia", module: "CVS", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 18, problem: "Frozen shoulder", module: "Ortho", comm: 20, hx: 10, pe: 30, dx: 10, mx: 30 },
-      { no: 19, problem: "GERD", module: "GI", comm: 20, hx: 30, pe: 10, dx: 10, mx: 30 },
-      { no: 20, problem: "Headache", module: "Neuro", comm: 20, hx: 30, pe: 10, dx: 10, mx: 30 },
-      { no: 21, problem: "CA colon screening", module: "Prevention", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 22, problem: "Proteinuria", module: "Uro", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 23, problem: "Smoking/alcohol prevention", module: "Prevention", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 24, problem: "CA cervix prevention", module: "Prevention", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 25, problem: "HBV", module: "GI", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 },
-      { no: 26, problem: "Tinnitus", module: "ENT", comm: 30, hx: 20, pe: 10, dx: 10, mx: 30 }
+      { no: 1, caseName: "Menorhagia", module: "OG", ics: 15, ig: 35, pe: 10, dx: 10, cm: 30 },
+      { no: 2, caseName: "BPPV", module: "ENT", ics: 15, ig: 35, pe: 10, dx: 10, cm: 30 },
+      { no: 3, caseName: "UTI", module: "Uro", ics: 15, ig: 35, pe: 10, dx: 10, cm: 30 },
+      { no: 4, caseName: "Diarrhoea", module: "GI", ics: 20, ig: 30, pe: 10, dx: 10, cm: 30 },
+      { no: 5, caseName: "Pharyngitis", module: "Respi", ics: 20, ig: 30, pe: 10, dx: 10, cm: 30 },
+      { no: 6, caseName: "Elbow pain", module: "Ortho", ics: 15, ig: 20, pe: 30, dx: 10, cm: 25 },
+      { no: 7, caseName: "HT compliance", module: "CVS", ics: 10, ig: 30, pe: 15, dx: 15, cm: 30 },
+      { no: 8, caseName: "Asthma", module: "Respi", ics: 25, ig: 25, pe: 10, dx: 10, cm: 30 },
+      { no: 9, caseName: "Eczema", module: "Skin", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 10, caseName: "Dyspepsia", module: "GI", ics: 25, ig: 25, pe: 10, dx: 10, cm: 30 },
+      { no: 11, caseName: "Backache", module: "Ortho", ics: 20, ig: 20, pe: 15, dx: 15, cm: 30 },
+      { no: 12, caseName: "Hyperthyroid", module: "Endo", ics: 10, ig: 20, pe: 30, dx: 10, cm: 30 },
+      { no: 13, caseName: "PV discharge", module: "OG", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 14, caseName: "HT", module: "CVS", ics: 10, ig: 30, pe: 15, dx: 15, cm: 30 },
+      { no: 15, caseName: "Red eye", module: "Eye", ics: 20, ig: 30, pe: 10, dx: 10, cm: 30 },
+      { no: 16, caseName: "Hypothyroid", module: "Endo", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 17, caseName: "Hyperlipidaemia", module: "CVS", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 18, caseName: "Frozen shoulder", module: "Ortho", ics: 20, ig: 10, pe: 30, dx: 10, cm: 30 },
+      { no: 19, caseName: "GERD", module: "GI", ics: 20, ig: 30, pe: 10, dx: 10, cm: 30 },
+      { no: 20, caseName: "Headache", module: "Neuro", ics: 20, ig: 30, pe: 10, dx: 10, cm: 30 },
+      { no: 21, caseName: "CA colon screening", module: "Prevention", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 22, caseName: "Proteinuria", module: "Uro", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 23, caseName: "Smoking/alcohol prevention", module: "Prevention", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 24, caseName: "CA cervix prevention", module: "Prevention", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 25, caseName: "HBV", module: "GI", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 },
+      { no: 26, caseName: "Tinnitus", module: "ENT", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 }
+    ];
+
+    const scoreSections = [
+      {
+        key: "ics",
+        title: "ICS：人际沟通技巧",
+        denominator: 20,
+        items: [
+          { id: "ics1", label: "非语言沟通技巧", max: 5 },
+          { id: "ics2", label: "倾听及促进", max: 5 },
+          { id: "ics3", label: "同理心", max: 5 },
+          { id: "ics4", label: "ICE", max: 5 }
+        ]
+      },
+      {
+        key: "ig",
+        title: "IG：信息收集",
+        denominator: 25,
+        items: [
+          { id: "ig1", label: "提问方式", max: 5 },
+          { id: "ig2", label: "重要的临床信息", max: 5 },
+          { id: "ig3", label: "心理及社会", max: 5 },
+          { id: "ig4", label: "结构化问诊", max: 10 }
+        ]
+      },
+      {
+        key: "pe",
+        title: "PE：体格检查",
+        denominator: 5,
+        items: [
+          { id: "pe1", label: "体格检查", max: 5 }
+        ]
+      },
+      {
+        key: "dx",
+        title: "DX：诊断",
+        denominator: 4,
+        items: [
+          { id: "dx1", label: "诊断", max: 4 }
+        ]
+      },
+      {
+        key: "cm",
+        title: "CM：临床处理",
+        denominator: 35,
+        items: [
+          { id: "cm1", label: "解释和建议", max: 5 },
+          { id: "cm2", label: "药物", max: 5, allowNA: true },
+          { id: "cm3", label: "转诊", max: 5, allowNA: true },
+          { id: "cm4", label: "辅助检查", max: 5, allowNA: true },
+          { id: "cm5", label: "安全网及复诊", max: 10 },
+          { id: "cm6", label: "共同理解及共同合作", max: 5 }
+        ]
+      }
     ];
 
     function init() {
       document.getElementById("assessmentDate").value = new Date().toISOString().slice(0, 10);
 
+      fillSimpleSelect("candidateId", studentIds, "请选择学员编号");
+      fillSimpleSelect("stationSelect", stations, "请选择考站");
       fillCaseOptions();
-
-      fillScoreSelect("comm1", 5);
-      fillScoreSelect("comm2", 5);
-      fillScoreSelect("comm3", 5);
-      fillScoreSelect("comm4", 5);
-
-      fillScoreSelect("hx1", 5);
-      fillScoreSelect("hx2", 5);
-      fillScoreSelect("hx3", 5);
-      fillScoreSelect("hx4", 10);
-
-      fillScoreSelect("pevc", 5);
-      fillScoreSelect("dx", 4);
-
-      fillScoreSelect("mx1", 5);
-      fillScoreSelect("mx2", 5, true);
-      fillScoreSelect("mx3", 5, true);
-      fillScoreSelect("mx4", 5, true);
-      fillScoreSelect("mx5", 10);
-      fillScoreSelect("mx6", 5);
+      renderScoreSections();
 
       document.addEventListener("input", calculateAll);
       document.addEventListener("change", calculateAll);
@@ -901,15 +642,73 @@
       renderResultList();
     }
 
+    function fillSimpleSelect(id, values, placeholder) {
+      const select = document.getElementById(id);
+      select.innerHTML = `<option value="">${placeholder}</option>`;
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
     function fillCaseOptions() {
       const select = document.getElementById("caseSelect");
       select.innerHTML = "";
-
-      caseConfigs.forEach((item) => {
+      caseConfigs.forEach(item => {
         const option = document.createElement("option");
         option.value = item.no;
-        option.textContent = `${item.no}. ${item.problem} (${item.module})`;
+        option.textContent = `${item.no}. ${item.caseName} (${item.module})`;
         select.appendChild(option);
+      });
+    }
+
+    function renderScoreSections() {
+      const container = document.getElementById("scoreSections");
+      container.innerHTML = "";
+
+      scoreSections.forEach(section => {
+        const div = document.createElement("div");
+        div.className = "score-section";
+
+        let rows = "";
+
+        section.items.forEach(item => {
+          rows += `
+            <tr>
+              <td>${item.label}</td>
+              <td>${item.max}${item.allowNA ? " / N/A" : ""}</td>
+              <td><select id="${item.id}"></select></td>
+              <td><input id="${item.id}Note" type="text" placeholder="备注" /></td>
+            </tr>
+          `;
+        });
+
+        div.innerHTML = `
+          <div class="score-section-header">
+            <div class="score-section-title">${section.title}</div>
+            <div class="section-result">得分：<span id="${section.key}Percent">0</span>%</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>评分项</th>
+                <th>最高分</th>
+                <th>得分</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+
+        container.appendChild(div);
+
+        section.items.forEach(item => {
+          fillScoreSelect(item.id, item.max, item.allowNA);
+        });
       });
     }
 
@@ -934,17 +733,7 @@
 
     function getSelectedCase() {
       const selectedNo = Number(document.getElementById("caseSelect").value);
-      return caseConfigs.find((item) => item.no === selectedNo) || caseConfigs[0];
-    }
-
-    function getScore(id) {
-      const value = document.getElementById(id).value;
-
-      if (value === "" || value === "NA") {
-        return null;
-      }
-
-      return Number(value);
+      return caseConfigs.find(item => item.no === selectedNo) || caseConfigs[0];
     }
 
     function getRawValue(id) {
@@ -954,162 +743,110 @@
 
     function setValue(id, value) {
       const el = document.getElementById(id);
-      if (el) {
-        el.value = value || "";
-      }
+      if (el) el.value = value || "";
     }
 
     function round1(num) {
       return Math.round(num * 10) / 10;
     }
 
-    function calculateSectionPercent(scoreIds, denominator) {
-      let total = 0;
-      let hasEmpty = false;
-
-      scoreIds.forEach((id) => {
-        const score = getScore(id);
-
-        if (score === null) {
-          hasEmpty = true;
-        } else {
-          total += score;
-        }
-      });
-
-      return {
-        total,
-        denominator,
-        percent: denominator > 0 ? round1((total / denominator) * 100) : 0,
-        complete: !hasEmpty
-      };
-    }
-
-    function calculateMxPercent() {
-      const mxItems = [
-        { id: "mx1", max: 5, canNA: false },
-        { id: "mx2", max: 5, canNA: true },
-        { id: "mx3", max: 5, canNA: true },
-        { id: "mx4", max: 5, canNA: true },
-        { id: "mx5", max: 10, canNA: false },
-        { id: "mx6", max: 5, canNA: false }
-      ];
-
-      let total = 0;
-      let denominator = 35;
-      let hasEmpty = false;
-
-      mxItems.forEach((item) => {
-        const rawValue = getRawValue(item.id);
-
-        if (rawValue === "NA" && item.canNA) {
-          denominator -= item.max;
-          return;
-        }
-
-        if (rawValue === "") {
-          hasEmpty = true;
-          return;
-        }
-
-        total += Number(rawValue);
-      });
-
-      return {
-        total,
-        denominator,
-        percent: denominator > 0 ? round1((total / denominator) * 100) : 0,
-        complete: !hasEmpty
-      };
-    }
-
     function updateCurrentWeightDisplay() {
       const c = getSelectedCase();
-      const total = c.comm + c.hx + c.pe + c.dx + c.mx;
+      const total = c.ics + c.ig + c.pe + c.dx + c.cm;
 
       document.getElementById("currentCaseNo").textContent = c.no;
-      document.getElementById("currentProblem").textContent = c.problem;
+      document.getElementById("currentCase").textContent = c.caseName;
       document.getElementById("currentModule").textContent = c.module;
-      document.getElementById("currentCommWeight").textContent = c.comm + "%";
-      document.getElementById("currentHxWeight").textContent = c.hx + "%";
+      document.getElementById("currentIcsWeight").textContent = c.ics + "%";
+      document.getElementById("currentIgWeight").textContent = c.ig + "%";
       document.getElementById("currentPeWeight").textContent = c.pe + "%";
       document.getElementById("currentDxWeight").textContent = c.dx + "%";
-      document.getElementById("currentMxWeight").textContent = c.mx + "%";
+      document.getElementById("currentCmWeight").textContent = c.cm + "%";
       document.getElementById("currentWeightTotal").textContent = total + "%";
 
       const warning = document.getElementById("weightWarning");
-
       if (total !== 100) {
         warning.style.display = "block";
-        warning.textContent =
-          `提醒：当前案例权重合计为 ${total}%，不是 100%。系统当前会按权重合计进行归一化计算，避免最终分数超过 100。请核对该案例的原始权重。`;
+        warning.textContent = `提醒：当前案例权重合计为 ${total}%，不是 100%。系统会按权重合计进行归一化计算。`;
       } else {
         warning.style.display = "none";
         warning.textContent = "";
       }
     }
 
+    function calculateSection(section) {
+      let total = 0;
+      let denominator = section.denominator;
+      let hasEmpty = false;
+
+      section.items.forEach(item => {
+        const raw = getRawValue(item.id);
+
+        if (raw === "NA" && item.allowNA) {
+          denominator -= item.max;
+          return;
+        }
+
+        if (raw === "") {
+          hasEmpty = true;
+          return;
+        }
+
+        total += Number(raw);
+      });
+
+      const percent = denominator > 0 ? round1((total / denominator) * 100) : 0;
+
+      return {
+        total,
+        denominator,
+        percent,
+        complete: !hasEmpty
+      };
+    }
+
     function calculateAll() {
       updateCurrentWeightDisplay();
 
       const c = getSelectedCase();
+      const results = {};
 
-      const comm = calculateSectionPercent(["comm1", "comm2", "comm3", "comm4"], 20);
-      const hx = calculateSectionPercent(["hx1", "hx2", "hx3", "hx4"], 25);
-      const pe = calculateSectionPercent(["pevc"], 5);
-      const dx = calculateSectionPercent(["dx"], 4);
-      const mx = calculateMxPercent();
+      scoreSections.forEach(section => {
+        results[section.key] = calculateSection(section);
+        document.getElementById(section.key + "Percent").textContent = results[section.key].percent;
+      });
 
-      const weightTotal = c.comm + c.hx + c.pe + c.dx + c.mx;
+      const weightTotal = c.ics + c.ig + c.pe + c.dx + c.cm;
 
-      let overall = 0;
+      let overall = (
+        results.ics.percent * c.ics +
+        results.ig.percent * c.ig +
+        results.pe.percent * c.pe +
+        results.dx.percent * c.dx +
+        results.cm.percent * c.cm
+      );
 
-      if (NORMALIZE_IF_WEIGHT_NOT_100) {
-        overall =
-          (
-            comm.percent * c.comm +
-            hx.percent * c.hx +
-            pe.percent * c.pe +
-            dx.percent * c.dx +
-            mx.percent * c.mx
-          ) / weightTotal;
-      } else {
-        overall =
-          comm.percent * c.comm / 100 +
-          hx.percent * c.hx / 100 +
-          pe.percent * c.pe / 100 +
-          dx.percent * c.dx / 100 +
-          mx.percent * c.mx / 100;
-      }
-
+      overall = NORMALIZE_IF_WEIGHT_NOT_100 ? overall / weightTotal : overall / 100;
       overall = round1(overall);
 
-      const allComplete = comm.complete && hx.complete && pe.complete && dx.complete && mx.complete;
-      const passLine = Number(document.getElementById("passLine").value || 70);
+      const allComplete = Object.values(results).every(item => item.complete);
 
-      document.getElementById("commPercent").textContent = comm.percent;
-      document.getElementById("hxPercent").textContent = hx.percent;
-      document.getElementById("pePercent").textContent = pe.percent;
-      document.getElementById("dxPercent").textContent = dx.percent;
-      document.getElementById("mxPercent").textContent = mx.percent;
-
-      document.getElementById("summaryComm").textContent = comm.percent;
-      document.getElementById("summaryHx").textContent = hx.percent;
-      document.getElementById("summaryPe").textContent = pe.percent;
-      document.getElementById("summaryDx").textContent = dx.percent;
-      document.getElementById("summaryMx").textContent = mx.percent;
-
+      document.getElementById("summaryIcs").textContent = results.ics.percent;
+      document.getElementById("summaryIg").textContent = results.ig.percent;
+      document.getElementById("summaryPe").textContent = results.pe.percent;
+      document.getElementById("summaryDx").textContent = results.dx.percent;
+      document.getElementById("summaryCm").textContent = results.cm.percent;
       document.getElementById("overallScore").textContent = overall;
       document.getElementById("summaryWeightTotal").textContent = weightTotal;
-      document.getElementById("summaryPassLine").textContent = passLine;
-      document.getElementById("summaryCase").textContent = `${c.no}. ${c.problem}`;
+      document.getElementById("summaryPassLine").textContent = PASS_LINE;
+      document.getElementById("summaryCase").textContent = `${c.no}. ${c.caseName}`;
 
       const finalResult = document.getElementById("finalResult");
 
       if (!allComplete) {
         finalResult.textContent = "未完成";
         finalResult.className = "value pending";
-      } else if (overall >= passLine) {
+      } else if (overall >= PASS_LINE) {
         finalResult.textContent = "通过";
         finalResult.className = "value pass";
       } else {
@@ -1117,85 +854,50 @@
         finalResult.className = "value fail";
       }
 
-      return {
-        comm,
-        hx,
-        pe,
-        dx,
-        mx,
-        overall,
-        allComplete,
-        finalResult: finalResult.textContent
-      };
+      return { results, overall, allComplete, finalResult: finalResult.textContent };
     }
 
     function collectData() {
       const calculation = calculateAll();
       const c = getSelectedCase();
 
+      const scores = {};
+      const notes = {};
+
+      scoreSections.forEach(section => {
+        section.items.forEach(item => {
+          scores[item.id] = getRawValue(item.id);
+          notes[item.id] = getRawValue(item.id + "Note");
+        });
+      });
+
       return {
         id: "R" + Date.now(),
         createdAt: new Date().toLocaleString("zh-CN"),
         candidateName: getRawValue("candidateName"),
         candidateId: getRawValue("candidateId"),
-        trainingSite: getRawValue("trainingSite"),
         assessmentDate: getRawValue("assessmentDate"),
         assessorName: getRawValue("assessorName"),
-        assessmentRound: getRawValue("assessmentRound"),
-        passLine: getRawValue("passLine"),
+        station: getRawValue("stationSelect"),
         caseNo: c.no,
-        problem: c.problem,
+        caseName: c.caseName,
         module: c.module,
         weights: {
-          comm: c.comm,
-          hx: c.hx,
+          ics: c.ics,
+          ig: c.ig,
           pe: c.pe,
           dx: c.dx,
-          mx: c.mx,
-          total: c.comm + c.hx + c.pe + c.dx + c.mx
+          cm: c.cm,
+          total: c.ics + c.ig + c.pe + c.dx + c.cm
         },
-        scores: {
-          comm1: getRawValue("comm1"),
-          comm2: getRawValue("comm2"),
-          comm3: getRawValue("comm3"),
-          comm4: getRawValue("comm4"),
-          hx1: getRawValue("hx1"),
-          hx2: getRawValue("hx2"),
-          hx3: getRawValue("hx3"),
-          hx4: getRawValue("hx4"),
-          pevc: getRawValue("pevc"),
-          dx: getRawValue("dx"),
-          mx1: getRawValue("mx1"),
-          mx2: getRawValue("mx2"),
-          mx3: getRawValue("mx3"),
-          mx4: getRawValue("mx4"),
-          mx5: getRawValue("mx5"),
-          mx6: getRawValue("mx6")
-        },
-        notes: {
-          comm1: getRawValue("comm1Note"),
-          comm2: getRawValue("comm2Note"),
-          comm3: getRawValue("comm3Note"),
-          comm4: getRawValue("comm4Note"),
-          hx1: getRawValue("hx1Note"),
-          hx2: getRawValue("hx2Note"),
-          hx3: getRawValue("hx3Note"),
-          hx4: getRawValue("hx4Note"),
-          pevc: getRawValue("pevcNote"),
-          dx: getRawValue("dxNote"),
-          mx1: getRawValue("mx1Note"),
-          mx2: getRawValue("mx2Note"),
-          mx3: getRawValue("mx3Note"),
-          mx4: getRawValue("mx4Note"),
-          mx5: getRawValue("mx5Note"),
-          mx6: getRawValue("mx6Note")
-        },
+        scores,
+        notes,
         sectionPercent: {
-          comm: document.getElementById("summaryComm").textContent,
-          hx: document.getElementById("summaryHx").textContent,
+          ics: document.getElementById("summaryIcs").textContent,
+          ig: document.getElementById("summaryIg").textContent,
           pe: document.getElementById("summaryPe").textContent,
           dx: document.getElementById("summaryDx").textContent,
-          mx: document.getElementById("summaryMx").textContent
+          cm: document.getElementById("summaryCm").textContent
         },
         overallScore: document.getElementById("overallScore").textContent,
         finalResult: document.getElementById("finalResult").textContent,
@@ -1206,21 +908,18 @@
     }
 
     function saveDraft() {
-      const data = collectData();
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(collectData()));
       alert("已保存当前草稿到浏览器本机。");
     }
 
     function loadDraft() {
       const saved = localStorage.getItem(DRAFT_KEY);
-
       if (!saved) {
         alert("未找到本机保存的草稿。");
         return;
       }
 
-      const data = JSON.parse(saved);
-      fillFormFromData(data);
+      fillFormFromData(JSON.parse(saved));
       calculateAll();
       alert("已读取当前草稿。");
     }
@@ -1228,28 +927,20 @@
     function fillFormFromData(data) {
       setValue("candidateName", data.candidateName);
       setValue("candidateId", data.candidateId);
-      setValue("trainingSite", data.trainingSite);
       setValue("assessmentDate", data.assessmentDate);
       setValue("assessorName", data.assessorName);
-      setValue("assessmentRound", data.assessmentRound);
-      setValue("passLine", data.passLine || "70");
+      setValue("stationSelect", data.station);
       setValue("overallComment", data.overallComment);
       setValue("improvementPlan", data.improvementPlan);
 
-      if (data.caseNo) {
-        setValue("caseSelect", String(data.caseNo));
-      }
+      if (data.caseNo) setValue("caseSelect", String(data.caseNo));
 
       if (data.scores) {
-        Object.keys(data.scores).forEach((key) => {
-          setValue(key, data.scores[key]);
-        });
+        Object.keys(data.scores).forEach(key => setValue(key, data.scores[key]));
       }
 
       if (data.notes) {
-        Object.keys(data.notes).forEach((key) => {
-          setValue(key + "Note", data.notes[key]);
-        });
+        Object.keys(data.notes).forEach(key => setValue(key + "Note", data.notes[key]));
       }
     }
 
@@ -1270,8 +961,13 @@
         return;
       }
 
-      if (!data.assessmentDate) {
-        alert("请先填写评估日期。");
+      if (!data.candidateId) {
+        alert("请先选择学员编号。");
+        return;
+      }
+
+      if (!data.station) {
+        alert("请先选择考站。");
         return;
       }
 
@@ -1284,7 +980,6 @@
       list.push(data);
       saveResultList(list);
       renderResultList();
-
       alert("已加入评分结果列表。");
     }
 
@@ -1310,26 +1005,22 @@
 
       list.forEach((item, index) => {
         const resultClass =
-          item.finalResult === "通过"
-            ? "pass"
-            : item.finalResult === "不通过"
-              ? "fail"
-              : "pending";
+          item.finalResult === "通过" ? "pass" :
+          item.finalResult === "不通过" ? "fail" : "pending";
 
         const tr = document.createElement("tr");
-
         tr.innerHTML = `
           <td>${index + 1}</td>
           <td>${safeText(item.assessmentDate)}</td>
           <td>${safeText(item.candidateName)}</td>
           <td>${safeText(item.candidateId)}</td>
-          <td>${safeText(item.trainingSite)}</td>
-          <td>${safeText(item.caseNo)}. ${safeText(item.problem)}</td>
-          <td>${safeText(item.sectionPercent.comm)}%</td>
-          <td>${safeText(item.sectionPercent.hx)}%</td>
+          <td>${safeText(item.station)}</td>
+          <td>${safeText(item.caseNo)}. ${safeText(item.caseName)}</td>
+          <td>${safeText(item.sectionPercent.ics)}%</td>
+          <td>${safeText(item.sectionPercent.ig)}%</td>
           <td>${safeText(item.sectionPercent.pe)}%</td>
           <td>${safeText(item.sectionPercent.dx)}%</td>
-          <td>${safeText(item.sectionPercent.mx)}%</td>
+          <td>${safeText(item.sectionPercent.cm)}%</td>
           <td><strong>${safeText(item.overallScore)}</strong></td>
           <td class="${resultClass}">${safeText(item.finalResult)}</td>
           <td>${safeText(item.assessorName)}</td>
@@ -1339,64 +1030,57 @@
             <button class="btn-danger btn-small" onclick="deleteResult('${item.id}')">删除</button>
           </td>
         `;
-
         tbody.appendChild(tr);
       });
     }
 
     function showDetail(id) {
       const list = getResultList();
-      const item = list.find((r) => r.id === id);
-
+      const item = list.find(r => r.id === id);
       if (!item) return;
+
+      const rows = [];
+      scoreSections.forEach(section => {
+        section.items.forEach(scoreItem => {
+          rows.push(`
+            <tr>
+              <td>${safeText(section.title)}</td>
+              <td>${safeText(scoreItem.label)}</td>
+              <td>${safeText(item.scores[scoreItem.id])}</td>
+              <td>${safeText(item.notes[scoreItem.id])}</td>
+            </tr>
+          `);
+        });
+      });
 
       const panel = document.getElementById("detailPanel");
       const content = document.getElementById("detailContent");
 
       content.innerHTML = `
-        <table class="detail-table">
+        <table>
           <tbody>
             <tr><th>学员姓名</th><td>${safeText(item.candidateName)}</td><th>学员编号</th><td>${safeText(item.candidateId)}</td></tr>
-            <tr><th>培训机构</th><td>${safeText(item.trainingSite)}</td><th>评估日期</th><td>${safeText(item.assessmentDate)}</td></tr>
-            <tr><th>评估员</th><td>${safeText(item.assessorName)}</td><th>评估轮次</th><td>${safeText(item.assessmentRound)}</td></tr>
-            <tr><th>案例</th><td>${safeText(item.caseNo)}. ${safeText(item.problem)}</td><th>Module</th><td>${safeText(item.module)}</td></tr>
-            <tr><th>Comm</th><td>${safeText(item.sectionPercent.comm)}%</td><th>Hx</th><td>${safeText(item.sectionPercent.hx)}%</td></tr>
-            <tr><th>PE</th><td>${safeText(item.sectionPercent.pe)}%</td><th>Dx</th><td>${safeText(item.sectionPercent.dx)}%</td></tr>
-            <tr><th>Mx</th><td>${safeText(item.sectionPercent.mx)}%</td><th>最终总分</th><td><strong>${safeText(item.overallScore)}</strong></td></tr>
-            <tr><th>通过线</th><td>${safeText(item.passLine)}%</td><th>结果</th><td>${safeText(item.finalResult)}</td></tr>
+            <tr><th>评估日期</th><td>${safeText(item.assessmentDate)}</td><th>考官姓名</th><td>${safeText(item.assessorName)}</td></tr>
+            <tr><th>考站</th><td>${safeText(item.station)}</td><th>案例</th><td>${safeText(item.caseNo)}. ${safeText(item.caseName)}</td></tr>
+            <tr><th>Module</th><td>${safeText(item.module)}</td><th>最终总分</th><td><strong>${safeText(item.overallScore)}</strong></td></tr>
+            <tr><th>结果</th><td>${safeText(item.finalResult)}</td><th>权重合计</th><td>${safeText(item.weights.total)}%</td></tr>
             <tr><th>总体评价</th><td colspan="3">${safeText(item.overallComment)}</td></tr>
             <tr><th>改进建议</th><td colspan="3">${safeText(item.improvementPlan)}</td></tr>
           </tbody>
         </table>
 
-        <h3 style="margin-top: 18px;">各评分项明细</h3>
+        <h3>各评分项明细</h3>
 
-        <table class="detail-table">
+        <table>
           <thead>
             <tr>
+              <th>大项</th>
               <th>评分项</th>
               <th>得分</th>
               <th>备注</th>
             </tr>
           </thead>
-          <tbody>
-            ${detailScoreRow("Comm1", item.scores.comm1, item.notes.comm1)}
-            ${detailScoreRow("Comm2", item.scores.comm2, item.notes.comm2)}
-            ${detailScoreRow("Comm3", item.scores.comm3, item.notes.comm3)}
-            ${detailScoreRow("Comm4", item.scores.comm4, item.notes.comm4)}
-            ${detailScoreRow("Hx1", item.scores.hx1, item.notes.hx1)}
-            ${detailScoreRow("Hx2", item.scores.hx2, item.notes.hx2)}
-            ${detailScoreRow("Hx3", item.scores.hx3, item.notes.hx3)}
-            ${detailScoreRow("Hx4", item.scores.hx4, item.notes.hx4)}
-            ${detailScoreRow("PEVC", item.scores.pevc, item.notes.pevc)}
-            ${detailScoreRow("Dx", item.scores.dx, item.notes.dx)}
-            ${detailScoreRow("Mx1", item.scores.mx1, item.notes.mx1)}
-            ${detailScoreRow("Mx2", item.scores.mx2, item.notes.mx2)}
-            ${detailScoreRow("Mx3", item.scores.mx3, item.notes.mx3)}
-            ${detailScoreRow("Mx4", item.scores.mx4, item.notes.mx4)}
-            ${detailScoreRow("Mx5", item.scores.mx5, item.notes.mx5)}
-            ${detailScoreRow("Mx6", item.scores.mx6, item.notes.mx6)}
-          </tbody>
+          <tbody>${rows.join("")}</tbody>
         </table>
       `;
 
@@ -1404,20 +1088,9 @@
       panel.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    function detailScoreRow(label, score, note) {
-      return `
-        <tr>
-          <td>${safeText(label)}</td>
-          <td>${safeText(score)}</td>
-          <td>${safeText(note)}</td>
-        </tr>
-      `;
-    }
-
     function loadResultToForm(id) {
       const list = getResultList();
-      const item = list.find((r) => r.id === id);
-
+      const item = list.find(r => r.id === id);
       if (!item) return;
 
       const ok = confirm("是否将该记录载入上方评分表？当前未保存内容可能会被覆盖。");
@@ -1425,26 +1098,20 @@
 
       fillFormFromData(item);
       calculateAll();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function deleteResult(id) {
       const ok = confirm("确定要删除这条评分记录吗？");
       if (!ok) return;
 
-      let list = getResultList();
-      list = list.filter((item) => item.id !== id);
+      const list = getResultList().filter(item => item.id !== id);
       saveResultList(list);
       renderResultList();
     }
 
     function clearResultList() {
       const list = getResultList();
-
       if (list.length === 0) {
         alert("当前没有评分记录。");
         return;
@@ -1458,10 +1125,8 @@
     }
 
     function exportCurrentCSV() {
-      calculateAll();
       const data = collectData();
-      const rows = buildCSVRows([data], true);
-      downloadCSV(rows, `GOLD_OSCE_${data.candidateName || "Unnamed"}_${data.problem || "Case"}.csv`);
+      downloadCSV(buildCSVRows([data], true), `GOLD-C_OSCE_${data.candidateName || "Unnamed"}_${data.caseName || "Case"}.csv`);
     }
 
     function exportAllResultsCSV() {
@@ -1472,40 +1137,18 @@
         return;
       }
 
-      const rows = buildCSVRows(list, false);
-      downloadCSV(rows, `GOLD_OSCE_Result_List_${new Date().toISOString().slice(0, 10)}.csv`);
+      downloadCSV(buildCSVRows(list, false), `GOLD-C_OSCE_Result_List_${new Date().toISOString().slice(0, 10)}.csv`);
     }
 
     function buildCSVRows(list, includeDetail) {
       const rows = [];
 
       rows.push([
-        "序号",
-        "创建时间",
-        "评估日期",
-        "学员姓名",
-        "学员编号",
-        "培训机构",
-        "评估员",
-        "评估轮次",
-        "Case",
-        "Presenting Problem",
-        "Module",
-        "Comm Weight",
-        "Hx Weight",
-        "PE Weight",
-        "Dx Weight",
-        "Mx Weight",
-        "Comm %",
-        "Hx %",
-        "PE %",
-        "Dx %",
-        "Mx %",
-        "Overall Score",
-        "Pass Line",
-        "Final Result",
-        "Overall Comment",
-        "Improvement Plan"
+        "序号", "创建时间", "评估日期", "学员姓名", "学员编号", "考官姓名", "考站",
+        "Case No", "Case", "Module",
+        "ICS Weight", "IG Weight", "PE Weight", "DX Weight", "CM Weight",
+        "ICS %", "IG %", "PE %", "DX %", "CM %",
+        "Overall Score", "Pass Line", "Final Result", "Overall Comment", "Improvement Plan"
       ]);
 
       list.forEach((data, index) => {
@@ -1515,24 +1158,23 @@
           data.assessmentDate,
           data.candidateName,
           data.candidateId,
-          data.trainingSite,
           data.assessorName,
-          data.assessmentRound,
+          data.station,
           data.caseNo,
-          data.problem,
+          data.caseName,
           data.module,
-          data.weights.comm + "%",
-          data.weights.hx + "%",
+          data.weights.ics + "%",
+          data.weights.ig + "%",
           data.weights.pe + "%",
           data.weights.dx + "%",
-          data.weights.mx + "%",
-          data.sectionPercent.comm + "%",
-          data.sectionPercent.hx + "%",
+          data.weights.cm + "%",
+          data.sectionPercent.ics + "%",
+          data.sectionPercent.ig + "%",
           data.sectionPercent.pe + "%",
           data.sectionPercent.dx + "%",
-          data.sectionPercent.mx + "%",
+          data.sectionPercent.cm + "%",
           data.overallScore,
-          data.passLine + "%",
+          PASS_LINE + "%",
           data.finalResult,
           data.overallComment,
           data.improvementPlan
@@ -1540,23 +1182,12 @@
 
         if (includeDetail) {
           rows.push([]);
-          rows.push(["评分项", "得分", "备注"]);
-          rows.push(["Comm1", data.scores.comm1, data.notes.comm1]);
-          rows.push(["Comm2", data.scores.comm2, data.notes.comm2]);
-          rows.push(["Comm3", data.scores.comm3, data.notes.comm3]);
-          rows.push(["Comm4", data.scores.comm4, data.notes.comm4]);
-          rows.push(["Hx1", data.scores.hx1, data.notes.hx1]);
-          rows.push(["Hx2", data.scores.hx2, data.notes.hx2]);
-          rows.push(["Hx3", data.scores.hx3, data.notes.hx3]);
-          rows.push(["Hx4", data.scores.hx4, data.notes.hx4]);
-          rows.push(["PEVC", data.scores.pevc, data.notes.pevc]);
-          rows.push(["Dx", data.scores.dx, data.notes.dx]);
-          rows.push(["Mx1", data.scores.mx1, data.notes.mx1]);
-          rows.push(["Mx2", data.scores.mx2, data.notes.mx2]);
-          rows.push(["Mx3", data.scores.mx3, data.notes.mx3]);
-          rows.push(["Mx4", data.scores.mx4, data.notes.mx4]);
-          rows.push(["Mx5", data.scores.mx5, data.notes.mx5]);
-          rows.push(["Mx6", data.scores.mx6, data.notes.mx6]);
+          rows.push(["大项", "评分项", "得分", "备注"]);
+          scoreSections.forEach(section => {
+            section.items.forEach(item => {
+              rows.push([section.title, item.label, data.scores[item.id], data.notes[item.id]]);
+            });
+          });
         }
       });
 
@@ -1582,14 +1213,10 @@
     }
 
     function resetForm() {
-      if (!confirm("确定要清空当前表单吗？")) {
-        return;
-      }
+      if (!confirm("确定要清空当前表单吗？")) return;
 
-      document.querySelectorAll("input, select, textarea").forEach((el) => {
-        if (el.id === "passLine") {
-          el.value = "70";
-        } else if (el.tagName === "SELECT") {
+      document.querySelectorAll("input, select, textarea").forEach(el => {
+        if (el.tagName === "SELECT") {
           el.selectedIndex = 0;
         } else {
           el.value = "";
