@@ -15,7 +15,7 @@
     }
 
     .page {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 32px 20px 60px;
     }
@@ -180,6 +180,40 @@
       border-radius: 999px;
       padding: 8px 14px;
       font-size: 14px;
+      font-weight: 800;
+    }
+
+    .score-hint {
+      line-height: 1.6;
+      color: #374151;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 9px 11px;
+      min-height: 42px;
+    }
+
+    .hint-empty {
+      color: #9ca3af;
+    }
+
+    .hint-na {
+      color: #6b7280;
+      font-weight: 700;
+    }
+
+    .hint-bad {
+      color: #b91c1c;
+      font-weight: 800;
+    }
+
+    .hint-mid {
+      color: #b45309;
+      font-weight: 800;
+    }
+
+    .hint-good {
+      color: #047857;
       font-weight: 800;
     }
 
@@ -390,6 +424,10 @@
     <section class="card">
       <h2>三、OSCE 评分</h2>
 
+      <div class="notice">
+        选择每个评分项的得分后，系统会在右侧显示对应等级提示语。特殊评分项已按考官手册规则设置可选分值。
+      </div>
+
       <div id="scoreSections"></div>
     </section>
 
@@ -572,16 +610,39 @@
       { no: 26, caseName: "Tinnitus", module: "ENT", ics: 30, ig: 20, pe: 10, dx: 10, cm: 30 }
     ];
 
+    const ratingLabels = {
+      "0": "严重缺陷",
+      "1": "不合格",
+      "2": "边缘不合格",
+      "3": "边缘合格",
+      "4": "合格",
+      "5": "优秀",
+      "6": "边缘合格",
+      "8": "合格",
+      "10": "优秀",
+      "NA": "不适用"
+    };
+
+    const ratingDescriptions = {
+      "严重缺陷": "表现存在严重问题，可能影响评估安全、准确性或医患沟通质量。",
+      "不合格": "未达到该评分项基本要求，存在明显不足。",
+      "边缘不合格": "有部分表现，但不足以达到合格水平。",
+      "边缘合格": "基本达到最低合格要求，但表现仍不稳定或不充分。",
+      "合格": "达到该评分项要求，表现较清晰、合理、完整。",
+      "优秀": "表现充分、准确、流畅，能体现较高水平的临床沟通与处理能力。",
+      "不适用": "该项不纳入本次 CM 计算，系统会从 CM 分母中扣除此项最高分。"
+    };
+
     const scoreSections = [
       {
         key: "ics",
         title: "ICS：人际沟通技巧",
         denominator: 20,
         items: [
-          { id: "ics1", label: "非语言沟通技巧", max: 5 },
-          { id: "ics2", label: "倾听及促进", max: 5 },
-          { id: "ics3", label: "同理心", max: 5 },
-          { id: "ics4", label: "ICE", max: 5 }
+          { id: "ics1", label: "非语言沟通技巧", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "ics2", label: "倾听及促进", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "ics3", label: "同理心", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "ics4", label: "ICE", max: 5, options: [0, 1, 2, 3, 4, 5] }
         ]
       },
       {
@@ -589,10 +650,10 @@
         title: "IG：信息收集",
         denominator: 25,
         items: [
-          { id: "ig1", label: "提问方式", max: 5 },
-          { id: "ig2", label: "重要的临床信息", max: 5 },
-          { id: "ig3", label: "心理及社会", max: 5 },
-          { id: "ig4", label: "结构化问诊", max: 10 }
+          { id: "ig1", label: "提问方式", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "ig2", label: "重要的临床信息", max: 10, options: [0, 2, 4, 6, 8, 10] },
+          { id: "ig3", label: "心理及社会", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "ig4", label: "结构化问诊", max: 5, options: [0, 1, 4, 5] }
         ]
       },
       {
@@ -600,7 +661,7 @@
         title: "PE：体格检查",
         denominator: 5,
         items: [
-          { id: "pe1", label: "体格检查", max: 5 }
+          { id: "pe1", label: "体格检查", max: 5, options: [0, 1, 3, 4, 5] }
         ]
       },
       {
@@ -608,7 +669,7 @@
         title: "DX：诊断",
         denominator: 4,
         items: [
-          { id: "dx1", label: "诊断", max: 4 }
+          { id: "dx1", label: "诊断", max: 4, options: [0, 1, 3, 4] }
         ]
       },
       {
@@ -616,12 +677,12 @@
         title: "CM：临床处理",
         denominator: 35,
         items: [
-          { id: "cm1", label: "解释和建议", max: 5 },
-          { id: "cm2", label: "药物", max: 5, allowNA: true },
-          { id: "cm3", label: "转诊", max: 5, allowNA: true },
-          { id: "cm4", label: "辅助检查", max: 5, allowNA: true },
-          { id: "cm5", label: "安全网及复诊", max: 10 },
-          { id: "cm6", label: "共同理解及共同合作", max: 5 }
+          { id: "cm1", label: "解释和建议", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "cm2", label: "药物", max: 5, options: ["NA", 0, 1, 2, 3, 4, 5], allowNA: true },
+          { id: "cm3", label: "转诊", max: 5, options: ["NA", 0, 1, 2, 3, 4, 5], allowNA: true },
+          { id: "cm4", label: "辅助检查", max: 5, options: ["NA", 0, 1, 2, 3, 4, 5], allowNA: true },
+          { id: "cm5", label: "安全网及复诊", max: 5, options: [0, 1, 2, 3, 4, 5] },
+          { id: "cm6", label: "共同理解及共同合作", max: 10, options: [0, 2, 4, 6, 8, 10] }
         ]
       }
     ];
@@ -681,6 +742,7 @@
               <td>${item.max}${item.allowNA ? " / N/A" : ""}</td>
               <td><select id="${item.id}"></select></td>
               <td><input id="${item.id}Note" type="text" placeholder="备注" /></td>
+              <td><div id="${item.id}Hint" class="score-hint hint-empty">请选择得分后显示评分提示</div></td>
             </tr>
           `;
         });
@@ -694,10 +756,11 @@
           <table>
             <thead>
               <tr>
-                <th>评分项</th>
-                <th>最高分</th>
-                <th>得分</th>
-                <th>备注</th>
+                <th style="width: 22%;">评分项</th>
+                <th style="width: 10%;">最高分</th>
+                <th style="width: 14%;">得分</th>
+                <th style="width: 18%;">备注</th>
+                <th style="width: 36%;">评分提示</th>
               </tr>
             </thead>
             <tbody>${rows}</tbody>
@@ -707,28 +770,92 @@
         container.appendChild(div);
 
         section.items.forEach(item => {
-          fillScoreSelect(item.id, item.max, item.allowNA);
+          fillScoreSelect(item);
         });
       });
     }
 
-    function fillScoreSelect(id, max, allowNA = false) {
-      const select = document.getElementById(id);
+    function fillScoreSelect(item) {
+      const select = document.getElementById(item.id);
       select.innerHTML = `<option value="">请选择</option>`;
 
-      if (allowNA) {
-        const na = document.createElement("option");
-        na.value = "NA";
-        na.textContent = "N/A";
-        select.appendChild(na);
+      item.options.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        if (value === "NA") {
+          option.textContent = "不适用";
+        } else {
+          option.textContent = `${value} - ${getRatingLabel(value)}`;
+        }
+        select.appendChild(option);
+      });
+    }
+
+    function getRatingLabel(value) {
+      return ratingLabels[String(value)] || "";
+    }
+
+    function getHintClass(label) {
+      if (label === "严重缺陷" || label === "不合格") return "hint-bad";
+      if (label === "边缘不合格" || label === "边缘合格") return "hint-mid";
+      if (label === "合格" || label === "优秀") return "hint-good";
+      if (label === "不适用") return "hint-na";
+      return "";
+    }
+
+    function getItemSpecificHint(item, value) {
+      const label = getRatingLabel(value);
+
+      if (value === "" || value === null || value === undefined) {
+        return "请选择得分后显示评分提示";
       }
 
-      for (let i = 0; i <= max; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = i;
-        select.appendChild(option);
+      if (value === "NA") {
+        return "不适用：该项不纳入本次 CM 计算，系统会自动从 CM 分母中扣除此项最高分。";
       }
+
+      const common = ratingDescriptions[label] || "";
+
+      const itemTips = {
+        "非语言沟通技巧": "关注眼神交流、语气、表情、神态自信、身体姿态及仪容整洁。",
+        "倾听及促进": "关注是否能倾听、点头、允许停顿，避免不合理打断或重复问诊。",
+        "同理心": "关注是否识别并回应病人的情绪表达，是否能以适当语言和非语言技巧安抚病人。",
+        "ICE": "关注是否了解病人的想法、担忧和期望，并避免影响医患关系。",
+        "提问方式": "关注开放式与封闭式提问的使用、转换是否自然，是否避免诱导式或多重提问。",
+        "重要的临床信息": "关注是否询问足够且关键的病史信息，尤其是重要阳性/阴性症状及红旗征。",
+        "心理及社会": "关注是否了解工作、生活、家庭及心理社会因素，并理解其与疾病的相互影响。",
+        "结构化问诊": "关注问诊是否有逻辑、有顺序，并能围绕重点推进。",
+        "体格检查": "关注检查项目是否适当、过程是否尊重病人、顺序是否合理、是否遗漏重要项目。",
+        "诊断": "关注诊断是否准确，是否存在诊断错误或未能给出诊断。",
+        "解释和建议": "关注是否准确解释病情，并给出足够、准确、针对性的非药物建议。",
+        "药物": "关注药物使用是否合理，是否询问过敏史，并说明用法、副作用等。",
+        "转诊": "关注转诊是否准确、合理，并能解释转诊原因及注意事项。",
+        "辅助检查": "关注检查是否合理，是否解释检查目的、原因及注意事项。",
+        "安全网及复诊": "关注是否交代危险信号、复诊安排及病情变化时的处理方式。",
+        "共同理解及共同合作": "关注是否确认病人理解、回应 ICE、达成共识，并体现共同决策。"
+      };
+
+      return `${label}：${common} ${itemTips[item.label] || ""}`;
+    }
+
+    function updateAllHints() {
+      scoreSections.forEach(section => {
+        section.items.forEach(item => {
+          const value = getRawValue(item.id);
+          const hint = document.getElementById(item.id + "Hint");
+          const label = getRatingLabel(value);
+
+          hint.textContent = getItemSpecificHint(item, value);
+          hint.className = "score-hint";
+
+          if (!value) {
+            hint.classList.add("hint-empty");
+          } else {
+            const cls = getHintClass(label);
+            if (cls) hint.classList.add(cls);
+          }
+        });
+      });
     }
 
     function getSelectedCase() {
@@ -807,6 +934,7 @@
 
     function calculateAll() {
       updateCurrentWeightDisplay();
+      updateAllHints();
 
       const c = getSelectedCase();
       const results = {};
@@ -863,11 +991,13 @@
 
       const scores = {};
       const notes = {};
+      const hints = {};
 
       scoreSections.forEach(section => {
         section.items.forEach(item => {
           scores[item.id] = getRawValue(item.id);
           notes[item.id] = getRawValue(item.id + "Note");
+          hints[item.id] = document.getElementById(item.id + "Hint").textContent;
         });
       });
 
@@ -892,6 +1022,7 @@
         },
         scores,
         notes,
+        hints,
         sectionPercent: {
           ics: document.getElementById("summaryIcs").textContent,
           ig: document.getElementById("summaryIg").textContent,
@@ -1047,6 +1178,7 @@
               <td>${safeText(section.title)}</td>
               <td>${safeText(scoreItem.label)}</td>
               <td>${safeText(item.scores[scoreItem.id])}</td>
+              <td>${safeText(item.hints ? item.hints[scoreItem.id] : "")}</td>
               <td>${safeText(item.notes[scoreItem.id])}</td>
             </tr>
           `);
@@ -1077,6 +1209,7 @@
               <th>大项</th>
               <th>评分项</th>
               <th>得分</th>
+              <th>评分提示</th>
               <th>备注</th>
             </tr>
           </thead>
@@ -1182,10 +1315,16 @@
 
         if (includeDetail) {
           rows.push([]);
-          rows.push(["大项", "评分项", "得分", "备注"]);
+          rows.push(["大项", "评分项", "得分", "评分提示", "备注"]);
           scoreSections.forEach(section => {
             section.items.forEach(item => {
-              rows.push([section.title, item.label, data.scores[item.id], data.notes[item.id]]);
+              rows.push([
+                section.title,
+                item.label,
+                data.scores[item.id],
+                data.hints ? data.hints[item.id] : "",
+                data.notes[item.id]
+              ]);
             });
           });
         }
